@@ -33,6 +33,21 @@ function EditAnyTable_init()
     load_plugin_textdomain( 'EditAnyTable', false, basename(dirname(__FILE__)).'/languages/');
 }
 
+function eat_plugin_activated() 
+{
+  $options = get_option('eat_options');
+
+  $options['eat_user'] = constant('DB_USER'); 
+  $options['eat_pwd'] = constant('DB_PASSWORD'); 
+  $options['eat_host'] = constant('DB_HOST'); 
+  $options['eat_db'] = constant('DB_NAME'); 
+
+  
+
+  update_option('eat_options', $options); 
+
+}
+add_action('activated_plugin', 'eat_plugin_activated'); 
 
 //load the options page
 require('eat_options.php');
